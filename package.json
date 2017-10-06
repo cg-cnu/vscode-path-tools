@@ -1,0 +1,59 @@
+{
+    "name": "vscode-fix-path",
+    "displayName": "vscode-fix-path",
+    "description": "fix paths ",
+    "version": "0.0.1",
+    "publisher": "cg-cnu",
+    "engines": {
+        "vscode": "^1.16.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:pathTools.relative",
+        "onCommand:pathTools.resolve",
+        "onCommand:pathTools.normalize",
+        "onCommand:pathTools.posix",
+        "onCommand:pathTools.windows"
+    ],
+    "main": "./out/src/pathTools",
+    "contributes": {
+        "commands": [
+            {
+                "command": "pathTools.relative",
+                "title": "Path Tools: Make Relative"
+            },
+            {
+                "command": "pathTools.resolve",
+                "title": "Path Tools: Resolve"
+            },
+            {
+                "command": "pathTools.normalize",
+                "title": "Path Tools: Normalize"
+            },
+            {
+                "command": "pathTools.posix",
+                "title": "Path Tools: Convert to posix"
+            },
+            {
+                "command": "pathTools.windows",
+                "title": "Path Tools: Convert to windows"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.5.2",
+        "vscode": "^1.1.5",
+        "mocha": "^3.5.0",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    }
+}
