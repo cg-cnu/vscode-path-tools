@@ -7,6 +7,33 @@
     "engines": {
         "vscode": "^1.16.0"
     },
+    "author": {
+        "email": "sreenivas9alapati@gmail.com",
+        "name": "Sreenivas Alapati",
+        "url": ""
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/cg-cnu/vscode-path-tools"
+    },
+    "readme": "README.md",
+    "license": "MIT",
+    "icon": "icons/path-tools-128.png",
+    "homepage": "https://github.com/cg-cnu/vscode-path-tools",
+    "bugs": {
+        "email": "sreenivas9alapati@gmail.com",
+        "url": "https://github.com/cg-cnu/vscode-path-tools/issues"
+    },
+    "galleryBanner": {
+        "theme": "dark"
+    },
+    "keywords": [
+        "path",
+        "tools",
+        "code",
+        "string",
+        "editing"
+    ],
     "categories": [
         "Other"
     ],
@@ -19,8 +46,7 @@
     ],
     "main": "./out/src/pathTools",
     "contributes": {
-        "commands": [
-            {
+        "commands": [{
                 "command": "pathTools.relative",
                 "title": "Path Tools: Make Relative"
             },
