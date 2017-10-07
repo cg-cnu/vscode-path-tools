@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/2767425/31290229-4a556604-aae9-11e7-9ba5-160bc69868e7.png"/>
+    <img src="https://user-images.githubusercontent.com/2767425/31305292-fb0ea3e2-ab53-11e7-95bb-450f56bfa060.png"/>
     <h1 align="center">Path Tools</h1>
     <h4 align="center">A couple of path utilities</h4>
     <br>
