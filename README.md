@@ -7,17 +7,21 @@
 
 ## Demo:
 
+<img src='https://user-images.githubusercontent.com/2767425/31352827-d2736f3e-ad4d-11e7-827a-c673f8967646.gif' />
+
 ## Features:
 
-* **Relative**: Convert selected path as relative path with respect to the current file.
-* **Resolve**:  Convert selected path to full path with respect to the current file.
-* **Windows**: Convert to windows `\\`.
-* **Posix**: Convert to posix `/`.
-* **Normalize**: Normalize the path by solving `../`.
+Convert selected path string...
+
+* **Relative**: relative path with respect to the current file.
+* **Resolve**:  full path with respect to the current file.
+* **Windows**: windows `\\`.
+* **Posix**:  posix `/`.
+* **Normalize**: to full path by normalizing `../`.
 
 ### Issue/Feedback:
 
-log them in the [github issues](https://github.com/cg-cnu/vscode-path-tools) or hit me on [twitter](https://twitter.com/CgCnu).
+log them in the [github issues](https://github.com/cg-cnu/vscode-path-tools) or hit me on [twitter](https://twitter.com/cgcnu).
 
 ### Like it?:
 

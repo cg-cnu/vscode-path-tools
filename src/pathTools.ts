@@ -149,28 +149,9 @@ export const activate = (context: vscode.ExtensionContext) => {
 
     // TODO: created by salapati @ 2017-10-6 22:22:14
     // select the path in the present line with out user input
-    // const selectPath = vscode.commands.registerCommand('pathTools.selectPath', () => {
-    //     // get the active text editor
-    //     const editor: vscode.TextEditor = vscode.window.activeTextEditor;
-    //     // if no active text editor
-    //     if (!editor) {
-    //         vscode.window.showErrorMessage("No file open");
-    //         return;
-    //     }
-    //     const lineText = editor.document.lineAt( editor.selection.active.line).text
-    //     vscode.window.showErrorMessage(lineText);
-        
-    //     const pathInLine = lineText.replace(/['"][\/\\]['"]+/g, '\\\\');
-    //     // replace current selection with the relative path
-    //     // editor.edit(editBuilder => {
-    //     //     // delete the selected path
-    //     //     editBuilder.delete(editor.selection);
-    //     //     // insert the relative path
-    //     //     editBuilder.insert(editor.selection.start, fixedPath);
-    //     // })
-    // });
-    // context.subscriptions.push(selectPath);
+    // make it global for all the above functions ?
 
 }
-
+// TODO: created by salapati @ 2017-10-8 12:29:56
+// remove if not necessary for all the ext
 export const deactivate = () => { }

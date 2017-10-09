@@ -1,7 +1,7 @@
 {
-    "name": "vscode-fix-path",
-    "displayName": "vscode-fix-path",
-    "description": "fix paths ",
+    "name": "vscode-path-tools",
+    "displayName": "Path Tools",
+    "description": "A couple of path utilities",
     "version": "0.0.1",
     "publisher": "cg-cnu",
     "engines": {
@@ -10,7 +10,7 @@
     "author": {
         "email": "sreenivas9alapati@gmail.com",
         "name": "Sreenivas Alapati",
-        "url": ""
+        "url": "https://twitter.com/cgcnu"
     },
     "repository": {
         "type": "git",
