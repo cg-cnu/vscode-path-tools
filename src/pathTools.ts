@@ -1,6 +1,8 @@
 'use strict';
 import * as vscode from 'vscode';
 import * as path from 'path';
+import * as tildify from 'tildify';
+import * as untildify from 'untildify';
 
 export const activate = (context: vscode.ExtensionContext) => {
 
@@ -59,7 +61,7 @@ export const activate = (context: vscode.ExtensionContext) => {
             return;
         }
         const normalizedPath: string = path.normalize(selectedPath);
-        
+
         editor.edit(editBuilder => {
             editBuilder.delete(editor.selection);
             editBuilder.insert(editor.selection.start, normalizedPath);
@@ -106,6 +108,55 @@ export const activate = (context: vscode.ExtensionContext) => {
         })
     });
     context.subscriptions.push(windows);
+
+    // convert home dir to ~ in the current selected path
+    const tilda = vscode.commands.registerCommand('pathTools.tilda', () => {
+        const editor: vscode.TextEditor = vscode.window.activeTextEditor;
+        if (!editor) {
+            vscode.window.showErrorMessage("No file open.");
+            return;
+        }
+        const selectedPath: string = editor.document.getText(editor.selection);
+        if (!selectedPath) {
+            vscode.window.showErrorMessage("No selected path.");
+            return;
+        }
+        const fixedPath: string = tildify(selectedPath);
+        if (fixedPath === selectedPath) {
+            vscode.window.showErrorMessage("Home directory don't exist in the selected path.");
+            return;
+        }
+        editor.edit(editBuilder => {
+            editBuilder.delete(editor.selection);
+            editBuilder.insert(editor.selection.start, fixedPath);
+        })
+    });
+    context.subscriptions.push(tilda);
+
+    // convert ~ to home dir in the current selected path 
+    const unTilda = vscode.commands.registerCommand('pathTools.unTilda', () => {
+        const editor: vscode.TextEditor = vscode.window.activeTextEditor;
+        if (!editor) {
+            vscode.window.showErrorMessage("No file open.");
+            return;
+        }
+        const selectedPath: string = editor.document.getText(editor.selection);
+        if (!selectedPath) {
+            vscode.window.showErrorMessage("No selected path.");
+            return;
+        }
+        const fixedPath: string = untildify(selectedPath);
+        if (fixedPath === selectedPath) {
+            vscode.window.showErrorMessage(" ~ don't exist in the selected path.");
+            return;
+        }
+        editor.edit(editBuilder => {
+            editBuilder.delete(editor.selection);
+            editBuilder.insert(editor.selection.start, fixedPath);
+        })
+    });
+    context.subscriptions.push(unTilda);
+
 
     // TODO: created by salapati @ 2017-10-6 22:22:14
     // select the path in the present line with out user input

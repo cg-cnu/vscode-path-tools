@@ -43,7 +43,8 @@
     ],
     "main": "./out/src/pathTools",
     "contributes": {
-        "commands": [{
+        "commands": [
+            {
                 "command": "pathTools.relative",
                 "title": "Path Tools: Make Relative"
             },
@@ -62,6 +63,14 @@
             {
                 "command": "pathTools.windows",
                 "title": "Path Tools: Convert to windows"
+            },
+            {
+                "command": "pathTools.tilda",
+                "title": "Path Tools: Convert HOME to ~"
+            },
+            {
+                "command": "pathTools.untilda",
+                "title": "Path Tools: Convert ~ to HOME"
             }
         ]
     },
@@ -78,5 +87,9 @@
         "mocha": "^3.5.0",
         "@types/node": "^7.0.43",
         "@types/mocha": "^2.2.42"
+    },
+    "dependencies": {
+        "tildify": "^1.2.0",
+        "untildify": "^3.0.2"
     }
 }
