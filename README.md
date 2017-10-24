@@ -18,6 +18,8 @@ Convert selected path string...
 * **Windows**: windows `\\`.
 * **Posix**:  posix `/`.
 * **Normalize**: to full path by normalizing `../`.
+* **Tildify**: home directory to `~`.
+* **Untildify**: Expand `~` to home directory.
 
 ### Issue/Feedback:
 

@@ -39,7 +39,9 @@
         "onCommand:pathTools.resolve",
         "onCommand:pathTools.normalize",
         "onCommand:pathTools.posix",
-        "onCommand:pathTools.windows"
+        "onCommand:pathTools.windows",
+        "onCommand:pathTools.tilda",
+        "onCommand:pathTools.untilda"
     ],
     "main": "./out/src/pathTools",
     "contributes": {
