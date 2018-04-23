@@ -15,11 +15,12 @@ Convert selected path string...
 
 * **Relative**: relative path with respect to the current file.
 * **Resolve**:  full path with respect to the current file.
-* **Windows**: windows `\\`.
-* **Posix**:  posix `/`.
+* **Windows**: convert path seperators to windows `\\`.
+* **Posix**:  convert path seperators to posix `/`.
 * **Normalize**: to full path by normalizing `../`.
 * **Tildify**: home directory to `~`.
 * **Untildify**: Expand `~` to home directory.
+* **Copy**: Copy current file path to clipboard.
 
 ### Issue/Feedback:
 
