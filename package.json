@@ -2,7 +2,7 @@
     "name": "vscode-path-tools",
     "displayName": "Path Tools",
     "description": "A couple of path utilities",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "publisher": "cg-cnu",
     "engines": {
         "vscode": "^1.16.0"
@@ -41,7 +41,8 @@
         "onCommand:pathTools.posix",
         "onCommand:pathTools.windows",
         "onCommand:pathTools.tilda",
-        "onCommand:pathTools.untilda"
+        "onCommand:pathTools.untilda",
+        "onCommand:pathTools.copy"
     ],
     "main": "./out/src/pathTools",
     "contributes": {
@@ -73,6 +74,10 @@
             {
                 "command": "pathTools.untilda",
                 "title": "Path Tools: Convert ~ to HOME"
+            },
+            {
+                "command": "pathTools.copy",
+                "title": "Path Tools: Copy current file path to clipboard"
             }
         ]
     },
@@ -91,6 +96,7 @@
         "@types/mocha": "^2.2.42"
     },
     "dependencies": {
+        "clipboardy": "^1.2.3",
         "tildify": "^1.2.0",
         "untildify": "^3.0.2"
     }
