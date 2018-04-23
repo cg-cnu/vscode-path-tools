@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as tildify from 'tildify';
 import * as untildify from 'untildify';
+import * as clipboardy from 'clipboardy';
 
 export const activate = (context: vscode.ExtensionContext) => {
 
@@ -134,7 +135,7 @@ export const activate = (context: vscode.ExtensionContext) => {
     context.subscriptions.push(tilda);
 
     // convert ~ to home dir in the current selected path 
-    const unTilda = vscode.commands.registerCommand('pathTools.unTilda', () => {
+    const untilda = vscode.commands.registerCommand('pathTools.untilda', () => {
         const editor: vscode.TextEditor = vscode.window.activeTextEditor;
         if (!editor) {
             vscode.window.showErrorMessage("No file open.");
@@ -155,8 +156,20 @@ export const activate = (context: vscode.ExtensionContext) => {
             editBuilder.insert(editor.selection.start, fixedPath);
         })
     });
-    context.subscriptions.push(unTilda);
-
+    context.subscriptions.push(untilda);
+    
+    // copy currentfile path to clipboard
+    const copy = vscode.commands.registerCommand('pathTools.copy', () => {
+        const editor: vscode.TextEditor = vscode.window.activeTextEditor;
+        if (!editor) {
+            vscode.window.showErrorMessage("No file open.");
+            return;
+        }
+        const currentFilePath: string = editor.document.uri.fsPath;
+        clipboardy.writeSync(currentFilePath);
+        vscode.window.showInformationMessage(`${currentFilePath} copied to clipboard.`);
+    });
+    context.subscriptions.push(copy);    
 
     // TODO: created by salapati @ 2017-10-6 22:22:14
     // select the path in the present line with out user input
