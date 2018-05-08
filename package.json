@@ -42,6 +42,7 @@
         "onCommand:pathTools.windows",
         "onCommand:pathTools.tilda",
         "onCommand:pathTools.untilda",
+        "onCommand:pathTools.select",
         "onCommand:pathTools.copy"
     ],
     "main": "./out/src/pathTools",
@@ -74,6 +75,10 @@
             {
                 "command": "pathTools.untilda",
                 "title": "Path Tools: Convert ~ to HOME"
+            },
+            {
+                "command": "pathTools.select",
+                "title": "Path Tools: select the path based on cursor location"
             },
             {
                 "command": "pathTools.copy",
