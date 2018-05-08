@@ -25,9 +25,9 @@ function findOccurances(
   } else {
     end = endString.indexOf('"') + position.character;
   }
-  const path: string = content.substring(start, end)
+  const path: string = content.substring(start, end);
 
-  if ( path.indexOf("/") === -1 ) return;
+  if (path.indexOf("/") === -1) return;
   return [start, end];
 }
 
@@ -211,7 +211,8 @@ export const activate = (context: vscode.ExtensionContext) => {
     }
 
     let selection = findOccurances(editor.document, editor.selection.active);
-    if (!selection){
+    if (!selection) {
+      vscode.window.showErrorMessage("No file paths found.");
       return;
     }
     // select the text
