@@ -2,7 +2,7 @@
     "name": "vscode-path-tools",
     "displayName": "Path Tools",
     "description": "A couple of path utilities",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "publisher": "cg-cnu",
     "engines": {
         "vscode": "^1.16.0"
