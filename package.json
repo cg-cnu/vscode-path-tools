@@ -1,108 +1,108 @@
 {
-    "name": "vscode-path-tools",
-    "displayName": "Path Tools",
-    "description": "A couple of path utilities",
-    "version": "0.0.4",
-    "publisher": "cg-cnu",
-    "engines": {
-        "vscode": "^1.16.0"
-    },
-    "author": {
-        "email": "sreenivas9alapati@gmail.com",
-        "name": "Sreenivas Alapati",
-        "url": "https://twitter.com/cgcnu"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/cg-cnu/vscode-path-tools"
-    },
-    "readme": "README.md",
-    "license": "MIT",
-    "icon": "icons/path-tools-128.png",
-    "homepage": "https://github.com/cg-cnu/vscode-path-tools",
-    "bugs": {
-        "email": "sreenivas9alapati@gmail.com",
-        "url": "https://github.com/cg-cnu/vscode-path-tools/issues"
-    },
-    "keywords": [
-        "path",
-        "tools",
-        "code",
-        "string",
-        "editing"
-    ],
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "onCommand:pathTools.relative",
-        "onCommand:pathTools.resolve",
-        "onCommand:pathTools.normalize",
-        "onCommand:pathTools.posix",
-        "onCommand:pathTools.windows",
-        "onCommand:pathTools.tilda",
-        "onCommand:pathTools.untilda",
-        "onCommand:pathTools.select",
-        "onCommand:pathTools.copy"
-    ],
-    "main": "./out/src/pathTools",
-    "contributes": {
-        "commands": [
-            {
-                "command": "pathTools.relative",
-                "title": "Path Tools: Make Relative"
-            },
-            {
-                "command": "pathTools.resolve",
-                "title": "Path Tools: Resolve"
-            },
-            {
-                "command": "pathTools.normalize",
-                "title": "Path Tools: Normalize"
-            },
-            {
-                "command": "pathTools.posix",
-                "title": "Path Tools: Convert to posix"
-            },
-            {
-                "command": "pathTools.windows",
-                "title": "Path Tools: Convert to windows"
-            },
-            {
-                "command": "pathTools.tilda",
-                "title": "Path Tools: Convert HOME to ~"
-            },
-            {
-                "command": "pathTools.untilda",
-                "title": "Path Tools: Convert ~ to HOME"
-            },
-            {
-                "command": "pathTools.select",
-                "title": "Path Tools: select the path based on cursor location"
-            },
-            {
-                "command": "pathTools.copy",
-                "title": "Path Tools: Copy current file path to clipboard"
-            }
-        ]
-    },
-    "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "typescript": "^2.5.2",
-        "vscode": "^1.1.5",
-        "mocha": "^3.5.0",
-        "@types/node": "^7.0.43",
-        "@types/mocha": "^2.2.42"
-    },
-    "dependencies": {
-        "clipboardy": "^1.2.3",
-        "tildify": "^1.2.0",
-        "untildify": "^3.0.2"
-    }
+  "name": "vscode-path-tools",
+  "displayName": "Path Tools",
+  "description": "A couple of path utilities",
+  "version": "0.0.4",
+  "publisher": "cg-cnu",
+  "engines": {
+    "vscode": "^1.16.0"
+  },
+  "author": {
+    "email": "sreenivas9alapati@gmail.com",
+    "name": "Sreenivas Alapati",
+    "url": "https://twitter.com/cgcnu"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cg-cnu/vscode-path-tools"
+  },
+  "readme": "README.md",
+  "license": "MIT",
+  "icon": "icons/path-tools-128.png",
+  "homepage": "https://github.com/cg-cnu/vscode-path-tools",
+  "bugs": {
+    "email": "sreenivas9alapati@gmail.com",
+    "url": "https://github.com/cg-cnu/vscode-path-tools/issues"
+  },
+  "keywords": [
+    "path",
+    "tools",
+    "code",
+    "string",
+    "editing"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:pathTools.relative",
+    "onCommand:pathTools.resolve",
+    "onCommand:pathTools.normalize",
+    "onCommand:pathTools.posix",
+    "onCommand:pathTools.windows",
+    "onCommand:pathTools.tilda",
+    "onCommand:pathTools.untilda",
+    "onCommand:pathTools.select",
+    "onCommand:pathTools.copy"
+  ],
+  "main": "./out/src/pathTools",
+  "contributes": {
+    "commands": [
+      {
+        "command": "pathTools.relative",
+        "title": "Path Tools: Make Relative"
+      },
+      {
+        "command": "pathTools.resolve",
+        "title": "Path Tools: Resolve"
+      },
+      {
+        "command": "pathTools.normalize",
+        "title": "Path Tools: Normalize"
+      },
+      {
+        "command": "pathTools.posix",
+        "title": "Path Tools: Convert to posix"
+      },
+      {
+        "command": "pathTools.windows",
+        "title": "Path Tools: Convert to windows"
+      },
+      {
+        "command": "pathTools.tilda",
+        "title": "Path Tools: Convert HOME to ~"
+      },
+      {
+        "command": "pathTools.untilda",
+        "title": "Path Tools: Convert ~ to HOME"
+      },
+      {
+        "command": "pathTools.select",
+        "title": "Path Tools: select the path based on cursor location"
+      },
+      {
+        "command": "pathTools.copy",
+        "title": "Path Tools: Copy current file path to clipboard"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^3.4.3",
+    "vscode": "^1.1.33",
+    "mocha": "^6.1.3",
+    "@types/node": "^11.13.2",
+    "@types/mocha": "^5.2.6"
+  },
+  "dependencies": {
+    "clipboardy": "^2.0.0",
+    "tildify": "^1.2.0",
+    "untildify": "^3.0.3"
+  }
 }
