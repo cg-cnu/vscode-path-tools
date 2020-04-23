@@ -78,7 +78,7 @@
       },
       {
         "command": "pathTools.select",
-        "title": "Path Tools: select the path based on cursor location"
+        "title": "Path Tools: select the path under cursor"
       },
       {
         "command": "pathTools.copy",
