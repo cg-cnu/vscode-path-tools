@@ -1,31 +1,30 @@
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/2767425/31305292-fb0ea3e2-ab53-11e7-95bb-450f56bfa060.png"/>
+    <img src="https://user-images.githubusercontent.com/2767425/80094591-adc9c100-85a5-11ea-907a-d7ba023d0ffb.png"/>
     <h1 align="center">Path Tools</h1>
     <h4 align="center">A couple of path utilities</h4>
     <br>
 </p>
 
-## Demo:
+## Demo
 
 <img src='https://user-images.githubusercontent.com/2767425/31352827-d2736f3e-ad4d-11e7-827a-c673f8967646.gif' />
 
-## Features:
+## Features
 
-Convert selected path string...
+- **Relative**: make path relative to current file.
+- **Resolve**: resolve path relative to current file.
+- **Windows**: convert path to windows `\\`.
+- **Posix**: convert path to posix `/`.
+- **Normalize**: normalize `../`.
+- **Tildify**: convert home to `~`.
+- **Untildify**: convert `~` to home.
+- **Copy**: copy current file path.
+- **Select**: select the path under cursor in quotes.
 
-* **Relative**: relative path with respect to the current file.
-* **Resolve**:  full path with respect to the current file.
-* **Windows**: convert path seperators to windows `\\`.
-* **Posix**:  convert path seperators to posix `/`.
-* **Normalize**: to full path by normalizing `../`.
-* **Tildify**: home directory to `~`.
-* **Untildify**: Expand `~` to home directory.
-* **Copy**: Copy current file path to clipboard.
-
-### Issue/Feedback:
+### Issue/Feedback
 
 log them in the [github issues](https://github.com/cg-cnu/vscode-path-tools) or hit me on [twitter](https://twitter.com/cgcnu).
 
-### Like it?:
+### Like it?
 
 :star: this repo.
