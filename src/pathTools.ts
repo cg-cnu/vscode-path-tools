@@ -4,7 +4,6 @@ import * as path from "path";
 import * as tildify from "tildify";
 import * as untildify from "untildify";
 import * as clipboardy from "clipboardy";
-import { start } from "repl";
 
 function findOccurances(
   doc: vscode.TextDocument,
@@ -31,185 +30,126 @@ function findOccurances(
   return [start, end];
 }
 
+const getEditor = (): vscode.TextEditor | undefined => {
+  const editor: vscode.TextEditor = vscode.window.activeTextEditor;
+  if (!editor) {
+    vscode.window.showErrorMessage("No file open.");
+    return;
+  }
+  return editor;
+};
+
+const getSelectedText = (editor: vscode.TextEditor): string | undefined => {
+  const selectedText: string = editor.document.getText(editor.selection);
+  if (!selectedText) {
+    vscode.window.showErrorMessage("No text selected.");
+    return;
+  }
+  return selectedText;
+};
+
+const getInputs = () => {
+  const editor: vscode.TextEditor | undefined = getEditor();
+  const selectedText: string | undefined = getSelectedText(editor);
+  return { editor, selectedText };
+};
+
+const setOutput = (editor, text) => {
+  editor.edit((editBuilder) => {
+    editBuilder.delete(editor.selection);
+    editBuilder.insert(editor.selection.start, text);
+  });
+};
+
 export const activate = (context: vscode.ExtensionContext) => {
-  // replace current selected path with the relative path
+  // make path relative to current file
   const relative = vscode.commands.registerCommand("pathTools.relative", () => {
-    const editor: vscode.TextEditor = vscode.window.activeTextEditor;
-    if (!editor) {
-      vscode.window.showErrorMessage("No file open.");
-      return;
-    }
-    const selectedPath: string = editor.document.getText(editor.selection);
-    if (!selectedPath) {
-      vscode.window.showErrorMessage("No selected path.");
-      return;
-    }
+    const { editor, selectedText } = getInputs();
+    console.log(editor);
+    console.log(selectedText);
+    if (editor == undefined || selectedText == undefined) return;
     const currentFilePath: string = path.dirname(editor.document.uri.fsPath);
-    const relativePath: string = path.relative(currentFilePath, selectedPath);
-    editor.edit(editBuilder => {
-      editBuilder.delete(editor.selection);
-      editBuilder.insert(editor.selection.start, relativePath);
-    });
+    const relativePath: string = path.relative(currentFilePath, selectedText);
+    setOutput(editor, relativePath);
   });
-  context.subscriptions.push(relative);
 
-  // replace current selected path to full path
+  // resolve path relative to the current file
   const resolve = vscode.commands.registerCommand("pathTools.resolve", () => {
-    const editor: vscode.TextEditor = vscode.window.activeTextEditor;
-    if (!editor) {
-      vscode.window.showErrorMessage("No file open.");
-      return;
-    }
-    var selectedPath: string = editor.document.getText(editor.selection);
-    if (!selectedPath) {
-      vscode.window.showErrorMessage("No selected path.");
-      return;
-    }
+    const { editor, selectedText } = getInputs();
+    if (editor == undefined || selectedText == undefined) return;
     const currentFilePath: string = path.dirname(editor.document.uri.fsPath);
-    const relativePath: string = path.resolve(currentFilePath, selectedPath);
-    editor.edit(editBuilder => {
-      editBuilder.delete(editor.selection);
-      editBuilder.insert(editor.selection.start, relativePath);
-    });
+    const resolvedPath: string = path.resolve(currentFilePath, selectedText);
+    setOutput(editor, resolvedPath);
   });
-  context.subscriptions.push(resolve);
 
-  // replace current selected path with the normalized path
+  // normalize the path
   const normalize = vscode.commands.registerCommand(
     "pathTools.normalize",
     () => {
-      const editor: vscode.TextEditor = vscode.window.activeTextEditor;
-      if (!editor) {
-        vscode.window.showErrorMessage("No file open.");
-        return;
-      }
-      var selectedPath: string = editor.document.getText(editor.selection);
-      if (!selectedPath) {
-        vscode.window.showErrorMessage("No selected path.");
-        return;
-      }
-      const normalizedPath: string = path.normalize(selectedPath);
-
-      editor.edit(editBuilder => {
-        editBuilder.delete(editor.selection);
-        editBuilder.insert(editor.selection.start, normalizedPath);
-      });
+      const { editor, selectedText } = getInputs();
+      if (editor == undefined || selectedText == undefined) return;
+      const normalizedPath: string = path.normalize(selectedText);
+      setOutput(editor, normalizedPath);
     }
   );
-  context.subscriptions.push(normalize);
 
-  // convert current selected path to posix path
+  // change path to posix
   const posix = vscode.commands.registerCommand("pathTools.posix", () => {
-    const editor: vscode.TextEditor = vscode.window.activeTextEditor;
-    if (!editor) {
-      vscode.window.showErrorMessage("No file open.");
-      return;
-    }
-    const selectedPath: string = editor.document.getText(editor.selection);
-    if (!selectedPath) {
-      vscode.window.showErrorMessage("No selected path.");
-      return;
-    }
-    const fixedPath: string = selectedPath.replace(/\\+/g, "/");
-    editor.edit(editBuilder => {
-      editBuilder.delete(editor.selection);
-      editBuilder.insert(editor.selection.start, fixedPath);
-    });
+    const { editor, selectedText } = getInputs();
+    if (editor == undefined || selectedText == undefined) return;
+    const posixPath: string = selectedText.replace(/\\+/g, "/");
+    setOutput(editor, posixPath);
   });
-  context.subscriptions.push(posix);
 
-  // replace current selected path with windows path
+  // change path to windows
   const windows = vscode.commands.registerCommand("pathTools.windows", () => {
-    const editor: vscode.TextEditor = vscode.window.activeTextEditor;
-    if (!editor) {
-      vscode.window.showErrorMessage("No file open.");
-      return;
-    }
-    const selectedPath: string = editor.document.getText(editor.selection);
-    if (!selectedPath) {
-      vscode.window.showErrorMessage("No selected path.");
-      return;
-    }
-    const fixedPath: string = selectedPath.replace(/[\/\\]/g, "\\\\");
-    editor.edit(editBuilder => {
-      editBuilder.delete(editor.selection);
-      editBuilder.insert(editor.selection.start, fixedPath);
-    });
+    const { editor, selectedText } = getInputs();
+    if (editor == undefined || selectedText == undefined) return;
+    const windowsPath: string = selectedText.replace(/[\/\\]/g, "\\\\");
+    setOutput(editor, windowsPath);
   });
-  context.subscriptions.push(windows);
 
-  // convert home dir to ~ in the current selected path
+  // convert home dir to ~
   const tilda = vscode.commands.registerCommand("pathTools.tilda", () => {
-    const editor: vscode.TextEditor = vscode.window.activeTextEditor;
-    if (!editor) {
-      vscode.window.showErrorMessage("No file open.");
-      return;
-    }
-    const selectedPath: string = editor.document.getText(editor.selection);
-    if (!selectedPath) {
-      vscode.window.showErrorMessage("No selected path.");
-      return;
-    }
-    const fixedPath: string = tildify(selectedPath);
-    if (fixedPath === selectedPath) {
+    const { editor, selectedText } = getInputs();
+    if (editor == undefined || selectedText == undefined) return;
+    const fixedPath: string = tildify(selectedText);
+    if (fixedPath === selectedText) {
       vscode.window.showErrorMessage(
         "Home directory don't exist in the selected path."
       );
       return;
     }
-    editor.edit(editBuilder => {
-      editBuilder.delete(editor.selection);
-      editBuilder.insert(editor.selection.start, fixedPath);
-    });
+    setOutput(editor, fixedPath);
   });
-  context.subscriptions.push(tilda);
 
-  // convert ~ to home dir in the current selected path
+  // convert ~ to home dir
   const untilda = vscode.commands.registerCommand("pathTools.untilda", () => {
-    const editor: vscode.TextEditor = vscode.window.activeTextEditor;
-    if (!editor) {
-      vscode.window.showErrorMessage("No file open.");
-      return;
-    }
-    const selectedPath: string = editor.document.getText(editor.selection);
-    if (!selectedPath) {
-      vscode.window.showErrorMessage("No selected path.");
-      return;
-    }
-    const fixedPath: string = untildify(selectedPath);
-    if (fixedPath === selectedPath) {
+    const { editor, selectedText } = getInputs();
+    if (editor == undefined || selectedText == undefined) return;
+    const fixedPath: string = untildify(selectedText);
+    if (fixedPath === selectedText) {
       vscode.window.showErrorMessage(" ~ don't exist in the selected path.");
       return;
     }
-    editor.edit(editBuilder => {
-      editBuilder.delete(editor.selection);
-      editBuilder.insert(editor.selection.start, fixedPath);
-    });
+    setOutput(editor, fixedPath);
   });
-  context.subscriptions.push(untilda);
 
   // copy currentfile path to clipboard
   const copy = vscode.commands.registerCommand("pathTools.copy", () => {
-    const editor: vscode.TextEditor = vscode.window.activeTextEditor;
-    if (!editor) {
-      vscode.window.showErrorMessage("No file open.");
-      return;
-    }
+    const editor: vscode.TextEditor = getEditor();
+    if (editor == undefined) return;
     const currentFilePath: string = editor.document.uri.fsPath;
     clipboardy.writeSync(currentFilePath);
     vscode.window.showInformationMessage(
       `${currentFilePath} copied to clipboard.`
     );
   });
-  context.subscriptions.push(copy);
 
+  // select the path under cursor in the quotes
   const select = vscode.commands.registerCommand("pathTools.select", () => {
-    const editor: vscode.TextEditor = vscode.window.activeTextEditor;
-    if (!editor) {
-      vscode.window.showErrorMessage("No file open.");
-      return;
-    }
-
+    const editor: vscode.TextEditor = getEditor();
+    if (editor == undefined) return;
     let selection = findOccurances(editor.document, editor.selection.active);
     if (!selection) {
       vscode.window.showErrorMessage("No file paths found.");
@@ -226,5 +166,20 @@ export const activate = (context: vscode.ExtensionContext) => {
     );
     const newSel = new vscode.Selection(startPos, endPos);
     editor.selection = newSel;
+  });
+
+  const commands = [
+    relative,
+    resolve,
+    normalize,
+    posix,
+    windows,
+    tilda,
+    untilda,
+    copy,
+    select,
+  ];
+  commands.forEach((command) => {
+    context.subscriptions.push(command);
   });
 };
