@@ -50,7 +50,7 @@
     "commands": [
       {
         "command": "pathTools.relative",
-        "title": "Path Tools: Make Relative"
+        "title": "Path Tools: Relative"
       },
       {
         "command": "pathTools.resolve",
@@ -62,27 +62,27 @@
       },
       {
         "command": "pathTools.posix",
-        "title": "Path Tools: Convert to posix"
+        "title": "Path Tools: To posix"
       },
       {
         "command": "pathTools.windows",
-        "title": "Path Tools: Convert to windows"
+        "title": "Path Tools: To windows"
       },
       {
         "command": "pathTools.tilda",
-        "title": "Path Tools: Convert HOME to ~"
+        "title": "Path Tools: HOME to ~"
       },
       {
         "command": "pathTools.untilda",
-        "title": "Path Tools: Convert ~ to HOME"
+        "title": "Path Tools: ~ to HOME"
       },
       {
         "command": "pathTools.select",
-        "title": "Path Tools: select the path under cursor"
+        "title": "Path Tools: select path under cursor"
       },
       {
         "command": "pathTools.copy",
-        "title": "Path Tools: Copy current file path to clipboard"
+        "title": "Path Tools: Copy current file path"
       }
     ]
   },
